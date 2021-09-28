@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="contentMan">
+    <div *ngIf="step === 0">
+      <div>
+        <h3 *ngIf="palpite != null">O animal que você pensou é um(a) {{ palpite }}</h3>
+        <h3 *ngIf="palpite === null && terrestre === 0">O animal que você pensou é um(a) macaco?</h3>
+        <h3 *ngIf="palpite === null && terrestre === 1">O animal que você pensou é um(a) tubarão?</h3>
+        
+        <button 
+          (click)="finish()" 
+          class="btn btn-default" 
+          style="margin-right: 4px;"
+          >sim</button>
+  
+          <button 
+          (click)="newNameAnimal()" 
+          class="btn btn-default" 
+          style="margin-right: 4px;"
+          >não</button>
+  
+      </div>
+    </div>
+  
+    <div *ngIf="step === 1">
+      <h3>Pense em um animal</h3>
+  
+      <button 
+        (click)="nextStep()" 
+        class="btn btn-default" 
+        style="margin-right: 4px;"
+        >ok</button>
+  
+      <button 
+        class="btn btn-default"
+        >cancelar</button>
+    </div>
+  
+    <div *ngIf="step === 2">
+      <h3>O animal que você pensou vive na água?</h3>
+  
+      <button 
+        (click)="setCaracteristica(true)" 
+        class="btn btn-default" 
+        style="margin-right: 4px;"
+        >sim</button>
+  
+      <button 
+        (click)="setCaracteristica(false)"
+        class="btn btn-default"
+        >não</button>
+    </div>
+  
+    <div *ngIf="step === 3 && loadedPosts.length >= 1">
+      <div>
+        <h3>O animal que você pensou {{ loadedPosts[option].caracteristica }}</h3>
+        
+        <button 
+          (click)="nextOption(true)" 
+          class="btn btn-default" 
+          style="margin-right: 4px;"
+          >sim</button>
+  
+        <button 
+          (click)="nextOption(false)" 
+          class="btn btn-default"
+          >não</button>
+      </div>
+    </div>
+  
+    <div *ngIf="step === 4">
+      <div>
+        <h3>Qual animal você pensou?</h3>
+        <input type="text" 
+          class="form-control"
+          [(ngModel)]="animal.nome"/>
+      </div>
+      <button 
+        (click)="nextStep()" 
+        class="btn btn-default" 
+        style="margin-right: 4px;"
+        >ok</button>
+    </div>
+  
+    <div *ngIf="step === 5">
+      <div>
+        <h3>Um(a) {{ animal.nome }} ________ mas um(a) {{ palpite }} não.</h3>
+        <input type="text" 
+          class="form-control"
+          [(ngModel)]="animal.caracteristica" />
+      </div>
+      <button 
+        (click)="submitNewAnimal()"
+        class="btn btn-default" 
+        style="margin-right: 4px;"
+        >ok</button>
+    </div>
+  </div>
+</div>
